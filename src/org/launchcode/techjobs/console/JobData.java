@@ -90,6 +90,9 @@ public class JobData {
 
     /**
      * TechJobs Console: Part II
+     *
+     * Error: Why does it only find values for the last three columns?
+     *
      * @param value is column value to be searched
      * @return List of all jobs that match column value searched
      */
@@ -106,10 +109,11 @@ public class JobData {
         for (HashMap<String,String> job : allJobs) {
             for (String key : job.keySet()) {
                 String aValue = job.get(key);
-                // convert fetched value to lowercase
-                aValue = aValue.toLowerCase();
-                if (aValue.equals(value)) {
-                    jobs.add(job);
+                aValue = aValue.toLowerCase();  // convert fetched value to lowercase
+                if (aValue.contains(value)) {
+                    if (!jobs.contains(job)) {
+                        jobs.add(job);
+                    }
                 }
             }
         }
