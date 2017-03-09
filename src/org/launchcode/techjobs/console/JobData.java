@@ -70,14 +70,47 @@ public class JobData {
         // load data, if not already loaded
         loadData();
 
+        // convert input value string to lowercase
+        value = value.toLowerCase();
+
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
 
         for (HashMap<String, String> row : allJobs) {
 
             String aValue = row.get(column);
-
+            // convert fetched value to lowercase
+            aValue = aValue.toLowerCase();
             if (aValue.contains(value)) {
                 jobs.add(row);
+            }
+        }
+
+        return jobs;
+    }
+
+    /**
+     * TechJobs Console: Part II
+     * @param value is column value to be searched
+     * @return List of all jobs that match column value searched
+     */
+    public static ArrayList<HashMap<String,String>> findByValue(String value) {
+
+        loadData();
+
+        // convert input value string to lowercase
+        value = value.toLowerCase();
+
+        ArrayList<HashMap<String,String>> jobs = new ArrayList<>();
+
+        // search a given column of the data for a given string
+        for (HashMap<String,String> job : allJobs) {
+            for (String key : job.keySet()) {
+                String aValue = job.get(key);
+                // convert fetched value to lowercase
+                aValue = aValue.toLowerCase();
+                if (aValue.equals(value)) {
+                    jobs.add(job);
+                }
             }
         }
 
