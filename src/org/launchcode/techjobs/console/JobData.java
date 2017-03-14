@@ -103,9 +103,8 @@ public class JobData {
             for (String key : job.keySet()) {
                 String aValue = job.get(key);
                 if (StringUtils.containsIgnoreCase(aValue,value)){
-                    if (!jobs.contains(job)) {
-                        jobs.add(job);
-                    }
+                    jobs.add(job);
+                    break;
                 }
             }
         }
