@@ -3,6 +3,7 @@ package org.launchcode.techjobs.console;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -70,17 +71,12 @@ public class JobData {
         // load data, if not already loaded
         loadData();
 
-        // convert input value string to lowercase
-        value = value.toLowerCase();
-
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
 
         for (HashMap<String, String> row : allJobs) {
 
             String aValue = row.get(column);
-            // convert fetched value to lowercase
-            aValue = aValue.toLowerCase();
-            if (aValue.contains(value)) {
+            if (StringUtils.containsIgnoreCase(aValue,value)) {
                 jobs.add(row);
             }
         }
@@ -100,17 +96,13 @@ public class JobData {
 
         loadData();
 
-        // convert input value string to lowercase
-        value = value.toLowerCase();
-
         ArrayList<HashMap<String,String>> jobs = new ArrayList<>();
 
         // search a given column of the data for a given string
         for (HashMap<String,String> job : allJobs) {
             for (String key : job.keySet()) {
                 String aValue = job.get(key);
-                aValue = aValue.toLowerCase();  // convert fetched value to lowercase
-                if (aValue.contains(value)) {
+                if (StringUtils.containsIgnoreCase(aValue,value)){
                     if (!jobs.contains(job)) {
                         jobs.add(job);
                     }
